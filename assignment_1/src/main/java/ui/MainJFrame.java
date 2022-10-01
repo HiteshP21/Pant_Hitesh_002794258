@@ -49,6 +49,11 @@ public class MainJFrame extends javax.swing.JFrame {
         });
 
         bt_view.setText("View");
+        bt_view.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_viewActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -104,6 +109,12 @@ public class MainJFrame extends javax.swing.JFrame {
         CreateJPanel createPanel = new  CreateJPanel(emp_info);
         SplitPanel.setRightComponent(createPanel);
     }//GEN-LAST:event_bt_createActionPerformed
+
+    private void bt_viewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_viewActionPerformed
+        // TODO add your handling code here:
+        ViewJPanel viewPanel = new  ViewJPanel(emp_info);
+        SplitPanel.setRightComponent(viewPanel);
+    }//GEN-LAST:event_bt_viewActionPerformed
 
     /**
      * @param args the command line arguments
