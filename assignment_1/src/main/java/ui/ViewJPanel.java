@@ -4,6 +4,9 @@
  */
 package ui;
 
+import java.awt.Image;
+import java.util.HashSet;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
@@ -21,6 +24,8 @@ public class ViewJPanel extends javax.swing.JPanel {
      * Creates new form ViewJPanel
      */
     
+//    ImageIcon disimg;
+    DefaultTableModel model;
     Emp_profile emp_info;
     public ViewJPanel(Emp_profile emp_info) {
         initComponents();
@@ -39,7 +44,6 @@ public class ViewJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jViewTable = new javax.swing.JTable();
         VpView = new javax.swing.JButton();
@@ -67,10 +71,8 @@ public class ViewJPanel extends javax.swing.JPanel {
         jCellp = new javax.swing.JTextField();
         jtxtSearch = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Create Employee Profile");
-        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPhoto = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         jViewTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -91,6 +93,11 @@ public class ViewJPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        jViewTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jViewTableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jViewTable);
 
         VpView.setText("View");
@@ -101,6 +108,11 @@ public class ViewJPanel extends javax.swing.JPanel {
         });
 
         VpUpd.setText("Update");
+        VpUpd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VpUpdActionPerformed(evt);
+            }
+        });
 
         VpDel.setText("Delete");
         VpDel.addActionListener(new java.awt.event.ActionListener() {
@@ -154,28 +166,48 @@ public class ViewJPanel extends javax.swing.JPanel {
 
         jLabel2.setText("Search: ");
 
+        jPhoto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPhoto.setText("Preview");
+        jPhoto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("View Employee Profile");
+        jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 890, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(51, 51, 51)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(txtName)
-                                .addGap(119, 119, 119)
-                                .addComponent(jtxtName, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addComponent(txtName)
+                                        .addGap(119, 119, 119)
+                                        .addComponent(jtxtName, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtEmpid)
+                                            .addComponent(txtAge))
+                                        .addGap(83, 83, 83)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jtxtEmpId)
+                                            .addComponent(jtxtAge, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(30, 30, 30)
+                                .addComponent(jPhoto, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 235, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(VpUpd)
+                                    .addComponent(VpDel)
+                                    .addComponent(VpView)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtEmpid)
-                                    .addComponent(txtAge)
                                     .addComponent(txtGen)
                                     .addComponent(txtDate)
                                     .addComponent(txtLevel)
@@ -185,90 +217,93 @@ public class ViewJPanel extends javax.swing.JPanel {
                                     .addComponent(txtEmail))
                                 .addGap(50, 50, 50)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jtxtEmpId)
-                                    .addComponent(jtxtAge)
                                     .addComponent(jtxtGen)
                                     .addComponent(jtxtSt_date)
                                     .addComponent(jtxtLevel)
                                     .addComponent(jtxtTinfo)
                                     .addComponent(jtxtPos)
                                     .addComponent(jCellp)
-                                    .addComponent(jtxtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(31, 31, 31)
-                                .addComponent(jLabel2))
-                            .addComponent(VpView))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(VpDel)
+                                    .addComponent(jtxtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel2)
                                 .addGap(18, 18, 18)
-                                .addComponent(VpUpd))
-                            .addComponent(jtxtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(53, 53, 53)))
+                                .addComponent(jtxtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(31, 31, 31))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {VpDel, VpUpd, VpView});
+
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addGap(12, 12, 12)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(93, 93, 93)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txtName)
+                                    .addComponent(jtxtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txtEmpid)
+                                    .addComponent(jtxtEmpId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txtAge)
+                                    .addComponent(jtxtAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(8, 8, 8)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jtxtGen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtGen))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jtxtSt_date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtDate))
+                                .addGap(7, 7, 7)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jtxtLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtLevel))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jtxtTinfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtInfo))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jtxtPos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtPos))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jCellp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtCell))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jtxtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtEmail)))
+                            .addComponent(jPhoto, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(52, 52, 52)
+                        .addComponent(VpView)
+                        .addGap(18, 18, 18)
+                        .addComponent(VpDel)
+                        .addGap(18, 18, 18)
+                        .addComponent(VpUpd)
+                        .addGap(44, 44, 44)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jtxtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtName)
-                            .addComponent(jtxtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(VpView)
-                                .addComponent(VpDel)
-                                .addComponent(VpUpd)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtEmpid)
-                            .addComponent(jtxtEmpId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtAge)
-                            .addComponent(jtxtAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtGen)
-                            .addComponent(jtxtGen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtDate)
-                            .addComponent(jtxtSt_date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtLevel)
-                            .addComponent(jtxtLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtInfo)
-                            .addComponent(jtxtTinfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtPos)
-                            .addComponent(jtxtPos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtCell)
-                            .addComponent(jCellp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtEmail)
-                            .addComponent(jtxtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(76, 76, 76))
+                            .addComponent(jLabel2))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -300,15 +335,28 @@ public class ViewJPanel extends javax.swing.JPanel {
 
     private void VpViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VpViewActionPerformed
         // TODO add your handling code here:
-        int selectedRowIndex = jViewTable.getSelectedRow();
         
+      int selectedRowIndex = jViewTable.getSelectedRow();
+        
+       model = (DefaultTableModel) jViewTable.getModel();
+                
         if (selectedRowIndex<0){
             JOptionPane.showMessageDialog(this, "Please select a row to view.");
             return;
         }
         
-        DefaultTableModel model = (DefaultTableModel) jViewTable.getModel();
+//        model = (DefaultTableModel) jViewTable.getModel();
         HR_product selectedInfo = (HR_product)model.getValueAt(selectedRowIndex, 0);
+        
+//        ImageIcon emp_img = new ImageIcon(selectedInfo.getPhoto());
+////        Image image = emp_img.getImage().getScaledInstance(120,120,Image.SCALE_SMOOTH);
+//        jPhoto.setIcon(emp_img);
+        
+        
+        ImageIcon emp_img = new ImageIcon(selectedInfo.getPhoto());
+        Image image = emp_img.getImage().getScaledInstance(155,155,Image.SCALE_SMOOTH);
+        emp_img  = new ImageIcon(image);
+        jPhoto.setIcon(emp_img);
         
         jtxtName.setText(String.valueOf(selectedInfo.getName()));
         jtxtEmpId.setText(String.valueOf(selectedInfo.getEmployeeId()));
@@ -320,6 +368,20 @@ public class ViewJPanel extends javax.swing.JPanel {
         jtxtPos.setText(String.valueOf(selectedInfo.getPosition_title()));
         jCellp.setText(String.valueOf(selectedInfo.getPhone_no()));
         jtxtEmail.setText(String.valueOf(selectedInfo.getEmail()));
+//        jPhView.setIcon(String.valueOf(selectedInfo.getPhoto()));
+        
+        
+//        ImageIcon disimg = new ImageIcon(empimg.getPhoto());
+////        String disimg = fil.getAbsolutePath();
+//        Image image = disimg.getImage().getScaledInstance(120,120,Image.SCALE_SMOOTH);
+//        disimg = new ImageIcon(image);
+////        jphotoview.setIcon(disimg);
+////        jphotoview.getIcon(empimg.getPhoto());
+//        jphotoview.setIcon(disimg);
+//        System.out.println(disimg);
+
+
+          
     }//GEN-LAST:event_VpViewActionPerformed
 
     private void jtxtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtSearchActionPerformed
@@ -329,12 +391,86 @@ public class ViewJPanel extends javax.swing.JPanel {
 
     private void jtxtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtSearchKeyReleased
         // TODO add your handling code here:
-        DefaultTableModel table = (DefaultTableModel)jViewTable.getModel();
+        DefaultTableModel model = (DefaultTableModel)jViewTable.getModel();
         String search = jtxtSearch.getText().toString();
-        TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(table);
+        TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(model);
         jViewTable.setRowSorter(tr);
         tr.setRowFilter(RowFilter.regexFilter("(?i)" + search));
     }//GEN-LAST:event_jtxtSearchKeyReleased
+
+    private void jViewTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jViewTableMouseClicked
+        // TODO add your handling code here:
+//        DefaultTableModel model = (DefaultTableModel)jViewTable.getModel();
+//        String tblName = model.getValueAt(jViewTable.getSelectedRow(), 0).toString();
+//        String tblEmpid = model.getValueAt(jViewTable.getSelectedRow(), 1).toString();
+//        String tblAge = model.getValueAt(jViewTable.getSelectedRow(), 2).toString();
+//        String tblGen = model.getValueAt(jViewTable.getSelectedRow(), 3).toString();
+//        String tblStDt = model.getValueAt(jViewTable.getSelectedRow(), 4).toString();
+//        String tblLevel = model.getValueAt(jViewTable.getSelectedRow(), 5).toString();
+//        String tblTinfo = model.getValueAt(jViewTable.getSelectedRow(), 6).toString();
+//        String tblPos = model.getValueAt(jViewTable.getSelectedRow(), 7).toString();
+//        String tblCellp = model.getValueAt(jViewTable.getSelectedRow(), 8).toString();
+//        String tblEmail = model.getValueAt(jViewTable.getSelectedRow(), 9).toString();
+//        
+//        
+//        jtxtName.setText(tblName);
+//        jtxtEmpId.setText(tblEmpid);
+//        jtxtAge.setText(tblAge);
+//        jtxtGen.setText(tblGen);
+//        jtxtSt_date.setText(tblStDt);
+//        jtxtLevel.setText(tblLevel);
+//        jtxtTinfo.setText(tblTinfo);
+//        jtxtPos.setText(tblPos);
+//        jCellp.setText(tblCellp);
+//        jtxtEmail.setText(tblEmail);
+//        
+        
+    }//GEN-LAST:event_jViewTableMouseClicked
+
+    private void VpUpdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VpUpdActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel)jViewTable.getModel();
+        int row2 = jViewTable.getSelectedRow();
+        if(row2>=0){
+            HR_product empInfo = new HR_product();
+            
+            empInfo = emp_info.getEmp_info().get(row2);
+            empInfo.setName(jtxtName.getText());
+            empInfo.setEmployeeId(Integer.parseInt(jtxtEmpId.getText()));
+            empInfo.setAge(Integer.parseInt(jtxtAge.getText()));
+            empInfo.setGender(txtGen.getText());
+            empInfo.setStart_date(jtxtSt_date.getText());
+            empInfo.setLevel(Integer.parseInt(jtxtLevel.getText()));
+            empInfo.setTeam_info(jtxtTinfo.getText());
+            empInfo.setPosition_title(jtxtPos.getText());
+            empInfo.setPhone_no(Long.parseLong(jCellp.getText()));
+            empInfo.setEmail(jtxtEmail.getText());
+            
+            populateTable();
+            
+            jtxtName.setText("");
+            jtxtEmpId.setText("");
+            jtxtAge.setText("");
+            jtxtGen.setText("");
+            jtxtSt_date.setText("");
+            jtxtLevel.setText("");
+            jtxtTinfo.setText("");
+            jtxtPos.setText("");
+            jCellp.setText("");
+            jtxtEmail.setText("");
+            
+            
+            JOptionPane.showMessageDialog(this, "Update done");
+        }
+        else{
+            if (jViewTable.getSelectedRowCount()== 0){
+                JOptionPane.showMessageDialog(this, "Table is empty.");
+            }
+            else{
+                JOptionPane.showMessageDialog(this, "Please select a row to update.");
+            }
+        }
+    }//GEN-LAST:event_VpUpdActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -344,6 +480,7 @@ public class ViewJPanel extends javax.swing.JPanel {
     private javax.swing.JTextField jCellp;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jPhoto;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jViewTable;
     private javax.swing.JTextField jtxtAge;
