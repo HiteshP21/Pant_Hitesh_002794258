@@ -9,16 +9,16 @@ Contains Options to Create an employee profile and View existing employee profil
 
 ### CreateJFrame:
 This contains the following Fields/Attributes:
-    1. Name
-    2. EmployeeId
-    3. Age
-    4. Gender 
-    5. Start Date
-    6. Level
-    7. Team Info
-    8. Psition title
-    9. Cell phone number
-    10. Email
+1. Name
+2. EmployeeId
+3. Age
+4. Gender 
+5. Start Date
+6. Level
+7. Team Info
+8. Psition title
+9. Cell phone number
+10. Email
 
 A tab to upload emplpyee photo is available along with preview window.
 
