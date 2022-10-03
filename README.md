@@ -4,6 +4,7 @@
 
 ### MainJFrame:
 This is the main window/welcom page of the portal.
+
 Contains Options to Create an employee profile and View existing employee profile.
 
 
