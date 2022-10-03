@@ -24,9 +24,9 @@ A tab to upload emplpyee photo is available along with preview window.
 
 ### ViewJFrame:
 This Pane contains the following operations:
-    1. View
-    2. Update 
-    3. Delete
+1. View
+2. Update 
+3. Delete
 
 Here you can view a sepecific employee priofle.
 Update the existing information w.r.t to a specific employee.
