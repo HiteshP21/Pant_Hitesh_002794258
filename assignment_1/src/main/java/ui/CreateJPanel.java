@@ -6,6 +6,8 @@ package ui;
 
 import java.awt.Image;
 import java.io.File;
+import java.util.HashSet;
+import java.util.Set;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -62,9 +64,9 @@ public class CreateJPanel extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         jImgAtt = new javax.swing.JLabel();
         jUpImg = new javax.swing.JButton();
+        jerrorGen = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(204, 204, 255));
-        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -98,6 +100,12 @@ public class CreateJPanel extends javax.swing.JPanel {
             }
         });
 
+        jtxtGen.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtxtGenKeyReleased(evt);
+            }
+        });
+
         jtxtPos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtxtPosActionPerformed(evt);
@@ -120,7 +128,6 @@ public class CreateJPanel extends javax.swing.JPanel {
 
         jImgAtt.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jImgAtt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jImgAtt.setText("Preview");
         jImgAtt.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         jImgAtt.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
@@ -166,14 +173,17 @@ public class CreateJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(207, 207, 207)
                         .addComponent(jButton1)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(81, 81, 81)
                         .addComponent(jImgAtt, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(121, 121, 121)
-                        .addComponent(jUpImg)))
-                .addContainerGap(164, Short.MAX_VALUE))
+                        .addComponent(jUpImg))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jerrorGen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(168, Short.MAX_VALUE))
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -201,7 +211,9 @@ public class CreateJPanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtGen)
-                            .addComponent(jtxtGen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jtxtGen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jerrorGen, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtDate)
@@ -248,9 +260,10 @@ public class CreateJPanel extends javax.swing.JPanel {
         long phone_no = Long.parseLong(jCellp.getText());
         String email = jtxtEmail.getText();
 //        String photo = jUpImg.getText();
-        
+
+
         HR_product emData = emp_info.addData();
-        
+
         emData.setName(name);
         emData.setEmployeeId(employeeId);
         emData.setAge(age);
@@ -277,10 +290,9 @@ public class CreateJPanel extends javax.swing.JPanel {
         jtxtPos.setText("");
         jCellp.setText("");
         jtxtEmail.setText("");
+
+
         
-        
-    
-   
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jtxtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtNameActionPerformed
@@ -312,6 +324,19 @@ public class CreateJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtxtEmailActionPerformed
 
+    private void jtxtGenKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtGenKeyReleased
+        // TODO add your handling code here:
+        if(jtxtGen.getText().contains("Male") || jtxtGen.getText().contains("Female")){
+            jerrorGen.setText("");
+            jButton1.setEnabled(true);
+        }
+        else{
+            jerrorGen.setText("Enter valid Male or Female");
+            jButton1.setEnabled(false);
+            
+        }
+    }//GEN-LAST:event_jtxtGenKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -319,6 +344,7 @@ public class CreateJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jImgAtt;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton jUpImg;
+    private javax.swing.JLabel jerrorGen;
     private javax.swing.JTextField jtxtAge;
     private javax.swing.JTextField jtxtEmail;
     private javax.swing.JTextField jtxtEmpId;
