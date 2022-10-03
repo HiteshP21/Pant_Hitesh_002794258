@@ -63,10 +63,13 @@ public class CreateJPanel extends javax.swing.JPanel {
         jImgAtt = new javax.swing.JLabel();
         jUpImg = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(204, 204, 255));
+        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Create Employee Profile");
-        jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+        jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         txtName.setText("Name");
@@ -107,6 +110,7 @@ public class CreateJPanel extends javax.swing.JPanel {
             }
         });
 
+        jButton1.setBackground(new java.awt.Color(51, 153, 255));
         jButton1.setText("Save");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -114,11 +118,13 @@ public class CreateJPanel extends javax.swing.JPanel {
             }
         });
 
-        jImgAtt.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jImgAtt.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jImgAtt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jImgAtt.setText("Preview");
         jImgAtt.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         jImgAtt.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
+        jUpImg.setBackground(new java.awt.Color(255, 255, 153));
         jUpImg.setText("Upload");
         jUpImg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -130,7 +136,6 @@ public class CreateJPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 850, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(98, 98, 98)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -168,7 +173,8 @@ public class CreateJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(121, 121, 121)
                         .addComponent(jUpImg)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(164, Short.MAX_VALUE))
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txtAge, txtCell, txtDate, txtEmail, txtEmpid, txtGen, txtInfo, txtLevel, txtName, txtPos});
@@ -257,7 +263,9 @@ public class CreateJPanel extends javax.swing.JPanel {
         emData.setEmail(email);
         emData.setPhoto(filename);
         
+
         JOptionPane.showMessageDialog(this, "New Employee Data Added.");
+        jImgAtt.setIcon(null);
 
         jtxtName.setText("");
         jtxtEmpId.setText("");
@@ -269,7 +277,8 @@ public class CreateJPanel extends javax.swing.JPanel {
         jtxtPos.setText("");
         jCellp.setText("");
         jtxtEmail.setText("");
-    
+        
+        
     
    
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -295,6 +304,7 @@ public class CreateJPanel extends javax.swing.JPanel {
         Image image = pre.getImage().getScaledInstance(155,155,Image.SCALE_SMOOTH);
         pre = new ImageIcon(image);
         jImgAtt.setIcon(pre);
+        
         
     }//GEN-LAST:event_jUpImgActionPerformed
 
