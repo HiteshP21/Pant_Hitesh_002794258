@@ -8,16 +8,15 @@ package ui;
  *
  * @author Hitesh
  */
-
-//import model.Patient_Dir;
-//import com.aed.backend.DoctorDirectory;
-//import com.aed.backend.DoctorPerson;
 import model.Encounter;
 import model.EncounterHistory;
+import model.Doctor_Dir;
+import model.Doctor;
 import model.Patient;
+import model.Patient_Dir;
 import model.Person;
-import com.aed.backend.SystemAdmin;
-import com.aed.backend.SystemAdminDirectory;
+import model.SysAdmin;
+import model.Sys_Admin_Dir;
 import java.util.Random;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -30,10 +29,10 @@ import javax.swing.table.DefaultTableModel;
 
 public class mainJFrame extends javax.swing.JFrame {
     String genderString = "Unknown";
-    PatientDirectory dir = new PatientDirectory();
-    DoctorDirectory docDir = new DoctorDirectory();
+    Patient_Dir patdir = new Patient_Dir();
+    Doctor_Dir d_Dir = new Doctor_Dir();
     EncounterHistory encHistory = new EncounterHistory();
-    SystemAdminDirectory sysAdminDir = new SystemAdminDirectory();
+    Sys_Admin_Dir sysAdminDir = new Sys_Admin_Dir();
     Encounter encToWorkWith = new Encounter();
     
     
@@ -53,7 +52,6 @@ public class mainJFrame extends javax.swing.JFrame {
         
         
         initComponents();
-        medicalLicenseNumberTextField.setEnabled(false);
         userName.setEnabled(false);
         encounterID.setEnabled(false);
         patientAgeFieldVitalSignsRecording.setEnabled(false);
@@ -104,8 +102,6 @@ public class mainJFrame extends javax.swing.JFrame {
         mailIDTextField = new javax.swing.JTextField();
         phone = new javax.swing.JLabel();
         phoneTextField = new javax.swing.JTextField();
-        role = new javax.swing.JLabel();
-        rolesComboBox = new javax.swing.JComboBox<>();
         gender = new javax.swing.JLabel();
         maleButton = new javax.swing.JRadioButton();
         femaleButton = new javax.swing.JRadioButton();
@@ -113,9 +109,12 @@ public class mainJFrame extends javax.swing.JFrame {
         DOB = new javax.swing.JLabel();
         register = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        medicalLicenseNumberTextField = new javax.swing.JTextField();
-        medicalLicense = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        dateChooserSysAdmin = new com.toedter.calendar.JDateChooser();
+        role1 = new javax.swing.JLabel();
+        rolesComboBox = new javax.swing.JComboBox<>();
+        jCom = new javax.swing.JLabel();
+        ComComboBox2 = new javax.swing.JComboBox<>();
         Workspace = new javax.swing.JPanel();
         jSplitPane1 = new javax.swing.JSplitPane();
         jPanel1 = new javax.swing.JPanel();
@@ -129,7 +128,6 @@ public class mainJFrame extends javax.swing.JFrame {
         viewAppoitnmentPatient = new javax.swing.JButton();
         CreatePatientAppointment = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
         PatientAppointmentDate = new javax.swing.JLabel();
         PatientAppointmentSubmit = new javax.swing.JButton();
         PatientAppointmentCancel = new javax.swing.JButton();
@@ -138,6 +136,11 @@ public class mainJFrame extends javax.swing.JFrame {
         PatientAppointmentReason = new javax.swing.JLabel();
         PatientAppointmentReasonArea = new javax.swing.JScrollPane();
         jTextArea2 = new javax.swing.JTextArea();
+        PatientAppointmentDateChooser = new com.toedter.calendar.JDateChooser();
+        PatientAppointmentCom = new javax.swing.JLabel();
+        PatientAppointmentHosp = new javax.swing.JLabel();
+        PatientAppHosp = new javax.swing.JComboBox<>();
+        PatientAppCom = new javax.swing.JTextField();
         ViewPatientAppointment = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         PatienAppointmentHistory = new javax.swing.JTable();
@@ -220,25 +223,16 @@ public class mainJFrame extends javax.swing.JFrame {
         mlnTextFieldSysAdmin = new javax.swing.JTextField();
         cancelSysAdmin = new javax.swing.JButton();
         registerSysAdmin = new javax.swing.JButton();
-        Grievences = new javax.swing.JPanel();
-        MailIDGrievencesLabel = new javax.swing.JLabel();
-        mailIDGrievences = new javax.swing.JTextField();
-        NumberGrievencesLabel = new javax.swing.JLabel();
-        NumberGrievences = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        CancelGrievences = new javax.swing.JButton();
-        SubmitGrievences = new javax.swing.JButton();
-        grievencesComboBox = new javax.swing.JComboBox<>();
-        grievencesSysAdmin = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new java.awt.CardLayout());
 
         Parent.setLayout(new java.awt.CardLayout());
 
-        AppLogo.setText("AppLogo");
+        AppLogo.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        AppLogo.setText("Login Portal");
 
+        username.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         username.setText("Username:");
 
         usernameTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -247,6 +241,7 @@ public class mainJFrame extends javax.swing.JFrame {
             }
         });
 
+        password.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         password.setText("Password:");
 
         jButton1.setText("Login");
@@ -268,9 +263,10 @@ public class mainJFrame extends javax.swing.JFrame {
         LoginLayout.setHorizontalGroup(
             LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(LoginLayout.createSequentialGroup()
+                .addGap(264, 264, 264)
                 .addGroup(LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(AppLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(LoginLayout.createSequentialGroup()
-                        .addGap(264, 264, 264)
                         .addGroup(LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(username)
                             .addComponent(password))
@@ -279,18 +275,15 @@ public class mainJFrame extends javax.swing.JFrame {
                             .addComponent(passwordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(usernameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton1)
-                            .addComponent(jButton2)))
-                    .addGroup(LoginLayout.createSequentialGroup()
-                        .addGap(340, 340, 340)
-                        .addComponent(AppLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(461, Short.MAX_VALUE))
+                            .addComponent(jButton2))))
+                .addContainerGap(627, Short.MAX_VALUE))
         );
         LoginLayout.setVerticalGroup(
             LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(LoginLayout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(AppLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(28, 28, 28)
+                .addComponent(AppLogo)
+                .addGap(81, 81, 81)
                 .addGroup(LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(username)
                     .addComponent(usernameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -302,65 +295,47 @@ public class mainJFrame extends javax.swing.JFrame {
                 .addComponent(jButton1)
                 .addGap(39, 39, 39)
                 .addComponent(jButton2)
-                .addContainerGap(283, Short.MAX_VALUE))
+                .addContainerGap(298, Short.MAX_VALUE))
         );
 
         Parent.add(Login, "card2");
 
-        Register.setLayout(null);
+        Register.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        AppLogo1.setText("AppLogo");
-        Register.add(AppLogo1);
-        AppLogo1.setBounds(410, 20, 68, 66);
+        AppLogo1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        AppLogo1.setText("New Registration ");
+        Register.add(AppLogo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 30, 220, 50));
 
+        username1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         username1.setText("Username:");
-        Register.add(username1);
-        username1.setBounds(269, 125, 83, 24);
-        Register.add(usernameTextField1);
-        usernameTextField1.setBounds(410, 125, 172, 22);
+        Register.add(username1, new org.netbeans.lib.awtextra.AbsoluteConstraints(269, 125, 100, 24));
+        Register.add(usernameTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 125, 172, -1));
 
+        password1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         password1.setText("Password:");
-        Register.add(password1);
-        password1.setBounds(269, 167, 83, 24);
+        Register.add(password1, new org.netbeans.lib.awtextra.AbsoluteConstraints(269, 167, 100, 24));
+        Register.add(passwordTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 167, 172, -1));
 
-        passwordTextField1.setText("jPasswordField1");
-        Register.add(passwordTextField1);
-        passwordTextField1.setBounds(410, 167, 172, 22);
-
+        emailID.setBackground(new java.awt.Color(0, 0, 0));
+        emailID.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         emailID.setText("Email ID:");
-        Register.add(emailID);
-        emailID.setBounds(269, 209, 83, 24);
-        Register.add(mailIDTextField);
-        mailIDTextField.setBounds(410, 209, 172, 22);
+        Register.add(emailID, new org.netbeans.lib.awtextra.AbsoluteConstraints(269, 209, 100, 24));
+        Register.add(mailIDTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 209, 172, -1));
 
+        phone.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         phone.setText("Phone No. :");
-        Register.add(phone);
-        phone.setBounds(269, 251, 83, 24);
+        Register.add(phone, new org.netbeans.lib.awtextra.AbsoluteConstraints(269, 251, 100, 24));
 
         phoneTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 phoneTextFieldActionPerformed(evt);
             }
         });
-        Register.add(phoneTextField);
-        phoneTextField.setBounds(410, 251, 172, 22);
+        Register.add(phoneTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 251, 172, -1));
 
-        role.setText("Role:");
-        Register.add(role);
-        role.setBounds(269, 293, 83, 24);
-
-        rolesComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Patient", "Doctor", "System Administration" }));
-        rolesComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rolesComboBoxActionPerformed(evt);
-            }
-        });
-        Register.add(rolesComboBox);
-        rolesComboBox.setBounds(410, 293, 172, 22);
-
+        gender.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         gender.setText("Gender:");
-        Register.add(gender);
-        gender.setBounds(269, 329, 83, 24);
+        Register.add(gender, new org.netbeans.lib.awtextra.AbsoluteConstraints(269, 329, 100, 24));
 
         genderButtonGroup.add(maleButton);
         maleButton.setText("Male");
@@ -369,8 +344,7 @@ public class mainJFrame extends javax.swing.JFrame {
                 maleButtonActionPerformed(evt);
             }
         });
-        Register.add(maleButton);
-        maleButton.setBounds(410, 330, 49, 21);
+        Register.add(maleButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 330, -1, -1));
 
         genderButtonGroup.add(femaleButton);
         femaleButton.setText("Female");
@@ -379,8 +353,7 @@ public class mainJFrame extends javax.swing.JFrame {
                 femaleButtonActionPerformed(evt);
             }
         });
-        Register.add(femaleButton);
-        femaleButton.setBounds(481, 330, 61, 21);
+        Register.add(femaleButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(481, 330, -1, -1));
 
         genderButtonGroup.add(othersButton);
         othersButton.setText("Others");
@@ -389,12 +362,11 @@ public class mainJFrame extends javax.swing.JFrame {
                 othersButtonActionPerformed(evt);
             }
         });
-        Register.add(othersButton);
-        othersButton.setBounds(571, 330, 57, 21);
+        Register.add(othersButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(571, 330, 58, -1));
 
-        DOB.setText("Date of birth:");
-        Register.add(DOB);
-        DOB.setBounds(269, 365, 70, 24);
+        DOB.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        DOB.setText("DOB");
+        Register.add(DOB, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 400, 100, 24));
 
         register.setText("Register");
         register.addActionListener(new java.awt.event.ActionListener() {
@@ -402,8 +374,7 @@ public class mainJFrame extends javax.swing.JFrame {
                 registerActionPerformed(evt);
             }
         });
-        Register.add(register);
-        register.setBounds(269, 536, 73, 23);
+        Register.add(register, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 440, 100, -1));
 
         jButton3.setText("Cancel");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -411,50 +382,76 @@ public class mainJFrame extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        Register.add(jButton3);
-        jButton3.setBounds(560, 530, 72, 23);
-        Register.add(medicalLicenseNumberTextField);
-        medicalLicenseNumberTextField.setBounds(410, 407, 168, 22);
-
-        medicalLicense.setText("Medical license No.:");
-        Register.add(medicalLicense);
-        medicalLicense.setBounds(269, 407, 106, 24);
+        Register.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 530, -1, -1));
 
         jLabel10.setBackground(new java.awt.Color(255, 255, 255));
-        Register.add(jLabel10);
-        jLabel10.setBounds(190, 10, 500, 560);
+        jLabel10.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentMoved(java.awt.event.ComponentEvent evt) {
+                jLabel10ComponentMoved(evt);
+            }
+        });
+        Register.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 20, 510, 560));
+        Register.add(dateChooserSysAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 400, 170, -1));
+
+        role1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        role1.setText("Role:");
+        Register.add(role1, new org.netbeans.lib.awtextra.AbsoluteConstraints(269, 293, 100, 24));
+
+        rolesComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Patient", "Doctor", "System Administration" }));
+        rolesComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rolesComboBoxActionPerformed(evt);
+            }
+        });
+        Register.add(rolesComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 293, 172, -1));
+
+        jCom.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jCom.setText("Community:");
+        Register.add(jCom, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 370, 100, 24));
+
+        ComComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dorchester", "Jamica", "Brookline" }));
+        ComComboBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ComComboBox2ActionPerformed(evt);
+            }
+        });
+        Register.add(ComComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 370, 172, -1));
 
         Parent.add(Register, "card3");
 
         jSplitPane1.setDividerLocation(200);
         jSplitPane1.setDividerSize(3);
 
-        jPanel1.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel1.setBackground(new java.awt.Color(153, 255, 0));
 
-        jButton5.setText("Log out");
+        jButton5.setText("Sign Out");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
             }
         });
 
-        leftWelcome.setForeground(new java.awt.Color(255, 255, 255));
-        leftWelcome.setText("Welcome:");
+        leftWelcome.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        leftWelcome.setText("Name");
 
-        leftAccID.setForeground(new java.awt.Color(255, 255, 255));
-        leftAccID.setText("Acc. ID:");
+        leftAccID.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        leftAccID.setText("ID");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(leftAccID)
-                    .addComponent(leftWelcome))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(leftAccID)
+                            .addComponent(leftWelcome, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -463,9 +460,9 @@ public class mainJFrame extends javax.swing.JFrame {
                 .addComponent(leftWelcome)
                 .addGap(28, 28, 28)
                 .addComponent(leftAccID)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 341, Short.MAX_VALUE)
-                .addComponent(jButton5)
-                .addGap(43, 43, 43))
+                .addGap(104, 104, 104)
+                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(265, Short.MAX_VALUE))
         );
 
         jSplitPane1.setLeftComponent(jPanel1);
@@ -473,8 +470,11 @@ public class mainJFrame extends javax.swing.JFrame {
         RightComponent.setBackground(new java.awt.Color(255, 255, 255));
         RightComponent.setLayout(new java.awt.CardLayout());
 
-        jLabel1.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
-        jLabel1.setText("Welcome Patient");
+        PatientHome.setBackground(new java.awt.Color(0, 204, 204));
+
+        jLabel1.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Patient Portal");
 
         createAppointment.setText("Create Appointment");
         createAppointment.addActionListener(new java.awt.event.ActionListener() {
@@ -495,36 +495,40 @@ public class mainJFrame extends javax.swing.JFrame {
         PatientHomeLayout.setHorizontalGroup(
             PatientHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PatientHomeLayout.createSequentialGroup()
-                .addGap(198, 198, 198)
                 .addGroup(PatientHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(PatientHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(viewAppoitnmentPatient, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(createAppointment, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(420, Short.MAX_VALUE))
+                    .addGroup(PatientHomeLayout.createSequentialGroup()
+                        .addGap(127, 127, 127)
+                        .addComponent(createAppointment, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(129, 129, 129)
+                        .addComponent(viewAppoitnmentPatient, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(PatientHomeLayout.createSequentialGroup()
+                        .addGap(294, 294, 294)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(295, Short.MAX_VALUE))
         );
         PatientHomeLayout.setVerticalGroup(
             PatientHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PatientHomeLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(createAppointment)
-                .addGap(26, 26, 26)
-                .addComponent(viewAppoitnmentPatient)
-                .addContainerGap(471, Short.MAX_VALUE))
+                .addGap(73, 73, 73)
+                .addGroup(PatientHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(viewAppoitnmentPatient, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(createAppointment, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(426, Short.MAX_VALUE))
         );
 
         RightComponent.add(PatientHome, "card2");
 
         CreatePatientAppointment.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel2.setFont(new java.awt.Font("Liberation Sans", 1, 17)); // NOI18N
-        jLabel2.setText("Create appointment");
+        jLabel2.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
+        jLabel2.setText("Book Appointment");
 
+        PatientAppointmentDate.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         PatientAppointmentDate.setText("Date of appointment:");
 
-        PatientAppointmentSubmit.setBackground(new java.awt.Color(51, 153, 255));
+        PatientAppointmentSubmit.setBackground(new java.awt.Color(153, 255, 153));
         PatientAppointmentSubmit.setText("Submit");
         PatientAppointmentSubmit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -532,7 +536,7 @@ public class mainJFrame extends javax.swing.JFrame {
             }
         });
 
-        PatientAppointmentCancel.setBackground(new java.awt.Color(255, 51, 51));
+        PatientAppointmentCancel.setBackground(new java.awt.Color(242, 242, 242));
         PatientAppointmentCancel.setText("Cancel");
         PatientAppointmentCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -540,69 +544,104 @@ public class mainJFrame extends javax.swing.JFrame {
             }
         });
 
-        PatientAppointmentDoctor.setText("Appointment with:");
+        PatientAppointmentDoctor.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        PatientAppointmentDoctor.setText("Doctor:");
 
         PatientAppointmentDrList.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Not Selected" }));
 
-        PatientAppointmentReason.setText("Ailment:");
+        PatientAppointmentReason.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        PatientAppointmentReason.setText("Describe Issue:");
 
         jTextArea2.setColumns(20);
         jTextArea2.setRows(5);
         PatientAppointmentReasonArea.setViewportView(jTextArea2);
 
+        PatientAppointmentCom.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        PatientAppointmentCom.setText("Community:");
+
+        PatientAppointmentHosp.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        PatientAppointmentHosp.setText("Hospital:");
+
+        PatientAppHosp.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Not Selected" }));
+
         javax.swing.GroupLayout CreatePatientAppointmentLayout = new javax.swing.GroupLayout(CreatePatientAppointment);
         CreatePatientAppointment.setLayout(CreatePatientAppointmentLayout);
         CreatePatientAppointmentLayout.setHorizontalGroup(
             CreatePatientAppointmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 813, Short.MAX_VALUE)
-            .addGroup(CreatePatientAppointmentLayout.createSequentialGroup()
-                .addGroup(CreatePatientAppointmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(CreatePatientAppointmentLayout.createSequentialGroup()
-                        .addGap(194, 194, 194)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(CreatePatientAppointmentLayout.createSequentialGroup()
-                        .addGap(69, 69, 69)
-                        .addGroup(CreatePatientAppointmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(PatientAppointmentDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(PatientAppointmentDate, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(PatientAppointmentReason, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(CreatePatientAppointmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(PatientAppointmentDrList, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(PatientAppointmentReasonArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(254, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CreatePatientAppointmentLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(PatientAppointmentCancel)
-                .addGap(18, 18, 18)
-                .addComponent(PatientAppointmentSubmit)
-                .addGap(27, 27, 27))
+                .addGap(208, 208, 208))
+            .addGroup(CreatePatientAppointmentLayout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addGroup(CreatePatientAppointmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(CreatePatientAppointmentLayout.createSequentialGroup()
+                        .addGroup(CreatePatientAppointmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(CreatePatientAppointmentLayout.createSequentialGroup()
+                                .addComponent(PatientAppointmentDate, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(27, 27, 27)
+                                .addComponent(PatientAppointmentDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(CreatePatientAppointmentLayout.createSequentialGroup()
+                                .addComponent(PatientAppointmentHosp, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(PatientAppHosp, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(78, 78, 78)
+                        .addGroup(CreatePatientAppointmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(CreatePatientAppointmentLayout.createSequentialGroup()
+                                .addComponent(PatientAppointmentDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(53, 53, 53)
+                                .addComponent(PatientAppointmentDrList, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(CreatePatientAppointmentLayout.createSequentialGroup()
+                                .addComponent(PatientAppointmentCom, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(PatientAppCom))))
+                    .addGroup(CreatePatientAppointmentLayout.createSequentialGroup()
+                        .addComponent(PatientAppointmentReason, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(42, 42, 42)
+                        .addGroup(CreatePatientAppointmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(PatientAppointmentSubmit)
+                            .addComponent(PatientAppointmentReasonArea, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         CreatePatientAppointmentLayout.setVerticalGroup(
             CreatePatientAppointmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CreatePatientAppointmentLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(31, 31, 31)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(80, 80, 80)
-                .addComponent(PatientAppointmentDate, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(CreatePatientAppointmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(PatientAppointmentDoctor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(PatientAppointmentDrList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(77, 77, 77)
                 .addGroup(CreatePatientAppointmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(CreatePatientAppointmentLayout.createSequentialGroup()
-                        .addComponent(PatientAppointmentReason, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
-                        .addGap(330, 330, 330))
+                        .addGroup(CreatePatientAppointmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(PatientAppointmentDate, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(PatientAppointmentDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(CreatePatientAppointmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(CreatePatientAppointmentLayout.createSequentialGroup()
+                                .addGap(124, 124, 124)
+                                .addComponent(PatientAppointmentReason, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
+                                .addGap(179, 179, 179))
+                            .addGroup(CreatePatientAppointmentLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(PatientAppointmentReasonArea, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(PatientAppointmentSubmit)
+                                .addGap(111, 111, 111)))
+                        .addComponent(PatientAppointmentCancel)
+                        .addGap(59, 59, 59))
                     .addGroup(CreatePatientAppointmentLayout.createSequentialGroup()
-                        .addComponent(PatientAppointmentReasonArea, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(6, 6, 6)
                         .addGroup(CreatePatientAppointmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(PatientAppointmentSubmit)
-                            .addComponent(PatientAppointmentCancel))
-                        .addGap(58, 58, 58))))
+                            .addComponent(PatientAppointmentCom, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(PatientAppCom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(29, 29, 29)
+                        .addGroup(CreatePatientAppointmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(CreatePatientAppointmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(PatientAppointmentHosp)
+                                .addComponent(PatientAppHosp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(CreatePatientAppointmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(PatientAppointmentDoctor)
+                                .addComponent(PatientAppointmentDrList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         RightComponent.add(CreatePatientAppointment, "card3");
@@ -667,7 +706,7 @@ public class mainJFrame extends javax.swing.JFrame {
         ViewPatientAppointment.setLayout(ViewPatientAppointmentLayout);
         ViewPatientAppointmentLayout.setHorizontalGroup(
             ViewPatientAppointmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSeparator2, javax.swing.GroupLayout.DEFAULT_SIZE, 813, Short.MAX_VALUE)
+            .addComponent(jSeparator2, javax.swing.GroupLayout.DEFAULT_SIZE, 897, Short.MAX_VALUE)
             .addGroup(ViewPatientAppointmentLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(ViewPatientAppointmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -717,7 +756,7 @@ public class mainJFrame extends javax.swing.JFrame {
                     .addComponent(BloodpressureViewAppointment)
                     .addComponent(temperatureViewAppointment)
                     .addComponent(respirationRateViewAppointment))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
                 .addComponent(HeightViewAppointment)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(ViewAppointmentAilment)
@@ -764,7 +803,7 @@ public class mainJFrame extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(DoctorHomeLayout.createSequentialGroup()
                 .addGroup(DoctorHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 807, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 891, Short.MAX_VALUE)
                     .addGroup(DoctorHomeLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(DoctorHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -955,7 +994,7 @@ public class mainJFrame extends javax.swing.JFrame {
                 .addGroup(VitalSignsPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(diagnosisVitalSignsRecording1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
                 .addGroup(VitalSignsPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(DoctorHomeBack)
                     .addComponent(AddVitalSignsToEncounter)
@@ -1080,7 +1119,7 @@ public class mainJFrame extends javax.swing.JFrame {
                 .addGroup(SystemAdminHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(accountDisable)
                     .addComponent(accountEnable))
-                .addContainerGap(80, Short.MAX_VALUE))
+                .addContainerGap(82, Short.MAX_VALUE))
         );
 
         RightComponent.add(SystemAdminHome, "card8");
@@ -1162,7 +1201,7 @@ public class mainJFrame extends javax.swing.JFrame {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(jRadioButton3))
                         .addComponent(mlnTextFieldSysAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(244, Short.MAX_VALUE))
+                .addContainerGap(427, Short.MAX_VALUE))
         );
         RegisterViaSysAdminLayout.setVerticalGroup(
             RegisterViaSysAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1199,7 +1238,7 @@ public class mainJFrame extends javax.swing.JFrame {
                 .addGroup(RegisterViaSysAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(mlnSysAdmin)
                     .addComponent(mlnTextFieldSysAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 137, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 168, Short.MAX_VALUE)
                 .addGroup(RegisterViaSysAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cancelSysAdmin)
                     .addComponent(registerSysAdmin))
@@ -1214,7 +1253,7 @@ public class mainJFrame extends javax.swing.JFrame {
         Workspace.setLayout(WorkspaceLayout);
         WorkspaceLayout.setHorizontalGroup(
             WorkspaceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 998, Short.MAX_VALUE)
+            .addComponent(jSplitPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         WorkspaceLayout.setVerticalGroup(
             WorkspaceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1223,103 +1262,14 @@ public class mainJFrame extends javax.swing.JFrame {
 
         Parent.add(Workspace, "card5");
 
-        MailIDGrievencesLabel.setText("Mail ID:");
-
-        NumberGrievencesLabel.setText("Number:");
-
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
-
-        CancelGrievences.setText("Cancel");
-        CancelGrievences.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CancelGrievencesActionPerformed(evt);
-            }
-        });
-
-        SubmitGrievences.setText("Submit");
-        SubmitGrievences.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SubmitGrievencesActionPerformed(evt);
-            }
-        });
-
-        grievencesComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Different", "Unable to login", "Unable to make account" }));
-
-        grievencesSysAdmin.setText("Grievence:");
-
-        javax.swing.GroupLayout GrievencesLayout = new javax.swing.GroupLayout(Grievences);
-        Grievences.setLayout(GrievencesLayout);
-        GrievencesLayout.setHorizontalGroup(
-            GrievencesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, GrievencesLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(CancelGrievences)
-                .addGap(28, 28, 28)
-                .addComponent(SubmitGrievences)
-                .addGap(92, 92, 92))
-            .addGroup(GrievencesLayout.createSequentialGroup()
-                .addGroup(GrievencesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(GrievencesLayout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addGroup(GrievencesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(GrievencesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(NumberGrievencesLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(MailIDGrievencesLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(grievencesSysAdmin))
-                        .addGap(18, 18, 18)
-                        .addGroup(GrievencesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(mailIDGrievences)
-                            .addComponent(NumberGrievences)
-                            .addComponent(grievencesComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(GrievencesLayout.createSequentialGroup()
-                        .addGap(47, 47, 47)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 652, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(218, Short.MAX_VALUE))
-        );
-        GrievencesLayout.setVerticalGroup(
-            GrievencesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(GrievencesLayout.createSequentialGroup()
-                .addGap(81, 81, 81)
-                .addGroup(GrievencesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(mailIDGrievences, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(MailIDGrievencesLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(GrievencesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(NumberGrievencesLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(NumberGrievences, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(GrievencesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(grievencesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(grievencesSysAdmin))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(GrievencesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CancelGrievences)
-                    .addComponent(SubmitGrievences))
-                .addGap(39, 39, 39))
-        );
-
-        Parent.add(Grievences, "card5");
-
         getContentPane().add(Parent, "card2");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void rolesComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rolesComboBoxActionPerformed
-        if (rolesComboBox.getSelectedIndex() == 1){
-            medicalLicenseNumberTextField.setEnabled(true);
-        }else{
-            medicalLicenseNumberTextField.setEnabled(false);
-        }
-    }//GEN-LAST:event_rolesComboBoxActionPerformed
-
     public String encIDGen(){
         Random ran = new Random();
-        int idInt = ran.nextInt(100);
+        int idInt = ran.nextInt(101);
         String encID = "ENC-"+idInt;
         return encID;
     }
@@ -1357,27 +1307,26 @@ public class mainJFrame extends javax.swing.JFrame {
     
     public void registerationProcessSysAdmin(){
         if (rolesComboBox.getSelectedItem().toString().equals("Doctor")){
-            DoctorPerson doc = docDir.addDcotorPerson();
-            doc.setUsername(unameTextSysAdmin.getText());
-            doc.setPassword(String.valueOf(passwordFieldSysAdmin.getPassword()));
-            doc.setMail(mailIDSysAdmin.getText());
+            Doctor doc = d_Dir.addDoc();
+            doc.setUsrname(unameTextSysAdmin.getText());
+            doc.setPass(String.valueOf(passwordFieldSysAdmin.getPassword()));
+            doc.setEmail(mailIDSysAdmin.getText());
             doc.setRole(comboBoxSysAdmin.getSelectedItem().toString());
-            doc.setDateOfBirth(dateChooserSysAdmin.getDate());
-            doc.setPhone(Integer.parseInt(phoneSysAdmin.getText()));
+            doc.setDob(dateChooserSysAdmin.getDate());
+            doc.setMob(Integer.parseInt(phoneSysAdmin.getText()));
             doc.setGender(genderString);
-            doc.setMdeicalLicenseNumber(mlnTextFieldSysAdmin.getText());
-            System.out.println(docDir.getDoctorDir().size());
-            PatientAppointmentDrList.addItem(doc.getUsername());
+//            System.out.println(docDir.getDoctorDir().size());
+            PatientAppointmentDrList.addItem(doc.getUsrname());
             sysAdminDocList();
             
         }else if(rolesComboBox.getSelectedItem().toString().equals("Patient")){
-            Patient person = dir.addPerson();
-            person.setUsername(unameTextSysAdmin.getText());
-            person.setPassword(String.valueOf(passwordFieldSysAdmin.getPassword()));
-            person.setMail(mailTextFieldSysAdmin.getText());
+            Patient person = patdir.addPerson();
+            person.setUsrname(unameTextSysAdmin.getText());
+            person.setPass(String.valueOf(passwordFieldSysAdmin.getPassword()));
+            person.setEmail(mailTextFieldSysAdmin.getText());
             person.setRole(comboBoxSysAdmin.getSelectedItem().toString());
-            person.setDateOfBirth(dateChooserSysAdmin.getDate());
-            person.setPhone(Integer.parseInt(phoneSysAdmin.getText()));
+            person.setDob(dateChooserSysAdmin.getDate());
+            person.setMob(Integer.parseInt(phoneSysAdmin.getText()));
             person.setGender(genderString);
             person.setUniqueID(patIDGen());
             sysAdminPatientList();
@@ -1388,40 +1337,42 @@ public class mainJFrame extends javax.swing.JFrame {
     
     public void registerationProcess(){
     if (rolesComboBox.getSelectedItem().toString().equals("Doctor")){
-            DoctorPerson doc = docDir.addDcotorPerson();
-            doc.setUsername(usernameTextField1.getText());
-            doc.setPassword(String.valueOf(passwordTextField1.getPassword()));
-            doc.setMail(mailIDTextField.getText());
+            Doctor doc = d_Dir.addDoc();
+            doc.setUsrname(usernameTextField1.getText());
+            doc.setPass(String.valueOf(passwordTextField1.getPassword()));
+            doc.setEmail(mailIDTextField.getText());
             doc.setRole(rolesComboBox.getSelectedItem().toString());
-            doc.setDateOfBirth(jDateChooser1.getDate());
-            doc.setPhone(Integer.parseInt(phoneTextField.getText()));
+            doc.setCom(ComComboBox2.getSelectedItem().toString());
+            doc.setDob(dateChooserSysAdmin.getDate());
+            doc.setMob(Integer.parseInt(phoneTextField.getText()));
             doc.setGender(genderString);
-            doc.setMdeicalLicenseNumber(medicalLicenseNumberTextField.getText());
-            System.out.println(docDir.getDoctorDir().size());
-            PatientAppointmentDrList.addItem(doc.getUsername());
+//            doc.setMdeicalLicenseNumber(medicalLicenseNumberTextField.getText());
+//            System.out.println(docDir.getDoctorDir().size());
+            PatientAppointmentDrList.addItem(doc.getUsrname());
             sysAdminDocList();
             
         }else if(rolesComboBox.getSelectedItem().toString().equals("Patient")){
-            Patient person = dir.addPerson();
-            person.setUsername(usernameTextField1.getText());
-            person.setPassword(String.valueOf(passwordTextField1.getPassword()));
-            person.setMail(mailIDTextField.getText());
+            Patient person = patdir.addPerson();
+            person.setUsrname(usernameTextField1.getText());
+            person.setPass(String.valueOf(passwordTextField1.getPassword()));
+            person.setEmail(mailIDTextField.getText());
             person.setRole(rolesComboBox.getSelectedItem().toString());
-            person.setDateOfBirth(jDateChooser1.getDate());
-            person.setPhone(Integer.parseInt(phoneTextField.getText()));
+            person.setCom(ComComboBox2.getSelectedItem().toString());
+            person.setDob(dateChooserSysAdmin.getDate());
+            person.setMob(Integer.parseInt(phoneTextField.getText()));
             person.setGender(genderString);
             person.setUniqueID(patIDGen());
             sysAdminPatientList();
             
         }else if(rolesComboBox.getSelectedItem().toString().equals("System Administration")){
-            SystemAdmin admin = sysAdminDir.addSystemAdmin();
-            admin.setUsername(usernameTextField1.getText());
-            admin.setPassword(String.valueOf(passwordTextField1.getPassword()));
-            admin.setMail(mailIDTextField.getText());
+            SysAdmin admin = sysAdminDir.addSystemAdmin();
+            admin.setUsrname(usernameTextField1.getText());
+            admin.setPass(String.valueOf(passwordTextField1.getPassword()));
+            admin.setEmail(mailIDTextField.getText());
             admin.setRole(rolesComboBox.getSelectedItem().toString());
-            admin.setDateOfBirth(jDateChooser1.getDate());
+            admin.setDob(dateChooserSysAdmin.getDate());
             admin.setGender(genderString);
-            admin.setPhone(Integer.parseInt(phoneTextField.getText()));
+            admin.setMob(Integer.parseInt(phoneTextField.getText()));
             admin.setAdminID(patIDGen());            
         }
     }
@@ -1455,24 +1406,24 @@ public class mainJFrame extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Patient data = ValidationPerson();
-        DoctorPerson dataDoc = ValidationDoctor();
-        SystemAdmin sysAdmin = ValidationSysAdmin();
+        Doctor dataDoc = ValidationDoctor();
+        SysAdmin sysAdmin = ValidationSysAdmin();
         if (data != null || dataDoc != null || sysAdmin != null){
             if (data.getRole() == "Patient"){
-                leftWelcome.setText("Welcome: "+ data.getUsername());
+                leftWelcome.setText("Name: "+ data.getUsrname());
                 leftAccID.setText("Acc. ID: "+data.getUniqueID());
                 PanelPaint(Workspace);
                 SplitPanelPaint(PatientHome);
                 
             }else if(dataDoc.getRole() == "Doctor"){
-                leftWelcome.setText("Welcome: "+ dataDoc.getUsername());
+                leftWelcome.setText("Welcome: "+ dataDoc.getUsrname());
                 leftAccID.setText("Acc. ID: "+dataDoc.getMdeicalLicenseNumber());
                 PanelPaint(Workspace);
                 SplitPanelPaint(DoctorHome);
-                doctorAppointmentsList(dataDoc.getUsername());
+                doctorAppointmentsList(dataDoc.getUsrname());
                 
             }else if(sysAdmin.getRole() == "System Administration"){
-                leftWelcome.setText("Welcome: "+ sysAdmin.getUsername());
+                leftWelcome.setText("Welcome: "+ sysAdmin.getUsrname());
                 leftAccID.setText("Acc. ID: "+sysAdmin.getAdminID());
                 PanelPaint(Workspace);
                 SplitPanelPaint(SystemAdminHome);
@@ -1486,9 +1437,9 @@ public class mainJFrame extends javax.swing.JFrame {
     public void sysAdminPatientList(){
         DefaultTableModel sysAdminPatList = (DefaultTableModel) patientListForSysAdmin.getModel();
         sysAdminPatList.setRowCount(0);
-        for (Patient pat: dir.getDir()){
+        for (Patient pat: patdir.getDir()){
           
-            String saPat[] = {pat.getUniqueID(), pat.getUsername(), pat.getGender(), pat.getMail(), String.valueOf(pat.getPhone()), pat.getAccountStatus()};
+            String saPat[] = {pat.getUniqueID(), pat.getUsrname(), pat.getGender(), pat.getEmail(), String.valueOf(pat.getMob()), pat.getAccountStatus()};
             sysAdminPatList.addRow(saPat);
         }
     }
@@ -1496,8 +1447,8 @@ public class mainJFrame extends javax.swing.JFrame {
     public void sysAdminDocList(){
         DefaultTableModel sysAdminDocList = (DefaultTableModel)doctorListForSysAdmin.getModel();
         sysAdminDocList.setRowCount(0);
-        for (DoctorPerson dp:docDir.getDoctorDir()){
-            String saDoc[] = {dp.getMdeicalLicenseNumber(), dp.getUsername(), dp.getMail(), String.valueOf(dp.getPhone()), dp.getAccountStatus()};
+        for (Doctor dp:d_Dir.getDoctorDir()){
+            String saDoc[] = {dp.getMdeicalLicenseNumber(), dp.getUsrname(), dp.getEmail(), String.valueOf(dp.getMob()), dp.getAccountStatus()};
             sysAdminDocList.addRow(saDoc);
         }
     }
@@ -1507,7 +1458,7 @@ public class mainJFrame extends javax.swing.JFrame {
         doctorTable.setRowCount(0);
         for (Encounter enc : encHistory.getEncounterHistory()){
             if(enc.getEncounterWith().equals(name)){
-                String docTableIn[] = {enc.getEncounterID(), enc.getAccountStatus(),enc.getUsername(), enc.getEncounterDate(), enc.getAilment()};                
+                String docTableIn[] = {enc.getEncounterID(), enc.getAccountStatus(),enc.getUsrname(), enc.getEncounterDate(), enc.getIssue()};                
                 doctorTable.addRow(docTableIn);
             }
         }
@@ -1517,8 +1468,8 @@ public class mainJFrame extends javax.swing.JFrame {
         DefaultTableModel patientTable = (DefaultTableModel) PatienAppointmentHistory.getModel();
         patientTable.setRowCount(0);
         for (Encounter enc : encHistory.getEncounterHistory()){
-            if (enc.getUsername().equals(name)){
-                String dataIn[] = {enc.getEncounterWith(), enc.getEncounterDate(), enc.getAilment()};
+            if (enc.getUsrname().equals(name)){
+                String dataIn[] = {enc.getEncounterWith(), enc.getEncounterDate(), enc.getIssue()};
                 patientTable.addRow(dataIn);
             }
         }
@@ -1527,10 +1478,6 @@ public class mainJFrame extends javax.swing.JFrame {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         PanelPaint(Login);
     }//GEN-LAST:event_jButton5ActionPerformed
-
-    private void CancelGrievencesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelGrievencesActionPerformed
-        PanelPaint(Login);
-    }//GEN-LAST:event_CancelGrievencesActionPerformed
 
     private void createAppointmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createAppointmentActionPerformed
         SplitPanelPaint(CreatePatientAppointment);
@@ -1544,17 +1491,16 @@ public class mainJFrame extends javax.swing.JFrame {
         SplitPanelPaint(PatientHome);
         //Here we will add methods to add data to storage.
         Encounter enc = encHistory.addEncounterHistory();
-        enc.setUsername(ValidationPerson().getUsername());
+        enc.setUsrname(ValidationPerson().getUsrname());
         enc.setGender(ValidationPerson().getGender());
+        enc.setEmail(ValidationPerson().getEmail());
+        enc.setMob(ValidationPerson().getMob());
+        enc.setTemp(0);
+        enc.setBp(0);
+        enc.setPulse(0);
         enc.setHeartRate(0);
-        enc.setMail(ValidationPerson().getMail());
-        enc.setPhone(ValidationPerson().getPhone());
-        enc.setRespirationRate(0);
-        enc.setBodyTemperatur(0);
-        enc.setBloodPressure(0);
-        enc.setHeight(0);
         enc.setRole(ValidationPerson().getRole());
-        enc.setAilment(jTextArea2.getText());
+        enc.setIssue(jTextArea2.getText());
         enc.setEncounterDate(PatientAppointmentDateChooser.getDate().toString());
         enc.setEncounterWith(PatientAppointmentDrList.getSelectedItem().toString());
         enc.setEncounterID(encIDGen());
@@ -1577,8 +1523,8 @@ public class mainJFrame extends javax.swing.JFrame {
         DefaultTableModel patientTable = (DefaultTableModel) PatienAppointmentHistory.getModel();
         patientTable.setRowCount(0);
         for (Encounter enc : encHistory.getEncounterHistory()){
-            if (enc.getUsername().equals(ValidationPerson().getUsername())){
-                String dataIn[] = {enc.getEncounterID(), enc.getEncounterWith(), enc.getEncounterDate(), enc.getAilment()};
+            if (enc.getUsrname().equals(ValidationPerson().getUsrname())){
+                String dataIn[] = {enc.getEncounterID(), enc.getEncounterWith(), enc.getEncounterDate(), enc.getIssue()};
                 patientTable.addRow(dataIn);
             }
         }
@@ -1595,11 +1541,11 @@ public class mainJFrame extends javax.swing.JFrame {
                     encToWorkWith = e;
                 }
             }
-            userName.setText(encToWorkWith.getUsername());
+            userName.setText(encToWorkWith.getUsrname());
             bloodGroupFieldVitalSignsRecording.setText("A+");
             encounterID.setText(encToWorkWith.getEncounterID());
             //need to add age as well
-            jTextArea4.setText(encToWorkWith.getAilment());
+            jTextArea4.setText(encToWorkWith.getIssue());
         }
     }//GEN-LAST:event_AddVitalSignsActionPerformed
 
@@ -1612,26 +1558,25 @@ public class mainJFrame extends javax.swing.JFrame {
         //Need to use Encounter ID to show the right data population.
         String id = PatienAppointmentHistory.getValueAt(row, 0).toString();
         Encounter enc = encHistory.getEncounterHistory().get(row);
-        ViewAppointmentUsername.setText("Username: "+enc.getUsername());
+        ViewAppointmentUsername.setText("Username: "+enc.getUsrname());
         ViewAppointmentWith.setText("Appointment with: "+enc.getEncounterWith());
         ViewAppointmentDate.setText("Appointment date: "+enc.getEncounterDate());
         HeartRate.setText("Heart rate: "+enc.getHeartRate());
-        BloodpressureViewAppointment.setText("Blood Pressure: "+enc.getBloodPressure());
-        temperatureViewAppointment.setText("Temperature: "+enc.getBodyTemperatur());
-        respirationRateViewAppointment.setText("Respiration Rate: "+enc.getRespirationRate());
-        HeightViewAppointment.setText("Height: "+enc.getHeight() + "cm.");
+        BloodpressureViewAppointment.setText("Blood Pressure: "+enc.getBp());
+        temperatureViewAppointment.setText("Temperature: "+enc.getTemp());
+        HeightViewAppointment.setText("Height: "+enc.getPulse());
         DiagnosisViewAppointment.setText("Diagnosis: "+enc.getDiagnosis());
-        ViewAppointmentAilment.setText("Ailment: "+enc.getAilment()+" "+enc.getRole());
+        ViewAppointmentAilment.setText("Ailment: "+enc.getIssue()+" "+enc.getRole());
     }//GEN-LAST:event_PatienAppointmentHistoryMouseClicked
 
     private void AddVitalSignsToEncounterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddVitalSignsToEncounterActionPerformed
         //int indexedVal = encHistory.getEncounterHistory().indexOf(encounterID.getText());
         //Encounter enc = encHistory.getEncounterHistory().get(indexedVal);
         System.out.println(encToWorkWith.getEncounterID());
-        encToWorkWith.setBloodPressure(Integer.parseInt(bloodPressureFieldVitalSignsRecording.getText()));
-        encToWorkWith.setHeight(Integer.parseInt(heightFieldVitalSignsRecording1.getText()));
-        encToWorkWith.setBloodPressure(Integer.parseInt(bloodPressureFieldVitalSignsRecording.getText()));
-        encToWorkWith.setRespirationRate(Integer.parseInt(respirationRateFieldVitalSignsRecording.getText()));
+        encToWorkWith.setBp(Integer.parseInt(bloodPressureFieldVitalSignsRecording.getText()));
+        encToWorkWith.setPulse(Integer.parseInt(heightFieldVitalSignsRecording1.getText()));
+        encToWorkWith.setBp(Integer.parseInt(bloodPressureFieldVitalSignsRecording.getText()));
+        encToWorkWith.setHeartRate(Integer.parseInt(respirationRateFieldVitalSignsRecording.getText()));
         encToWorkWith.setDiagnosis(jTextArea3.getText());
     }//GEN-LAST:event_AddVitalSignsToEncounterActionPerformed
 
@@ -1640,19 +1585,19 @@ public class mainJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_doctorListForSysAdminMouseClicked
 
     private void accountDisableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accountDisableActionPerformed
-        int row = doctorListForSysAdmin.getSelectedRow();
-        DoctorPerson dpToDisable = new DoctorPerson();
-        if (row != -1){
-            String ID = doctorListForSysAdmin.getValueAt(row, 0).toString();
-            for (DoctorPerson doc : docDir.getDoctorDir()){
-                if (doc.getMdeicalLicenseNumber().toString().equals(ID)){
-                    dpToDisable = doc;               
-                }              
-            }
-        }dpToDisable.setAccountStatus("Disable");
-        JOptionPane.showMessageDialog(this, "The doctor account has been disabled.");
-        sysAdminDocList();
-        PatientAppointmentDrList.removeItem(dpToDisable.getUsername());
+//        int row = doctorListForSysAdmin.getSelectedRow();
+//        Doctor drop_dis = new Doctor();
+//        if (row != -1){
+//            String ID = doctorListForSysAdmin.getValueAt(row, 0).toString();
+//            for (Doctor doc : d_Dir.getDoctorDir()){
+//                if (doc.getMdeicalLicenseNumber().toString().equals(ID)){
+//                    drop_dis = doc;               
+//                }              
+//            }
+//        }drop_dis.setAccountStatus("Disable");
+//        JOptionPane.showMessageDialog(this, "The doctor account has been disabled.");
+//        sysAdminDocList();
+//        PatientAppointmentDrList.removeItem(drop_dis.getUsrname());
     }//GEN-LAST:event_accountDisableActionPerformed
 
     private void accountDisablePatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accountDisablePatActionPerformed
@@ -1660,7 +1605,7 @@ public class mainJFrame extends javax.swing.JFrame {
         Patient patToDisable = new Patient();
         if(row != -1){
             String IDPat = patientListForSysAdmin.getValueAt(row, 0).toString();
-            for (Patient pat:dir.getDir()){
+            for (Patient pat:patdir.getDir()){
                 if (pat.getUniqueID().toString().equals(IDPat)){
                     patToDisable = pat;                
                 }
@@ -1679,7 +1624,7 @@ public class mainJFrame extends javax.swing.JFrame {
         Patient patToDisable = new Patient();
         if(row != -1){
             String IDPat = patientListForSysAdmin.getValueAt(row, 0).toString();
-            for (Patient pat:dir.getDir()){
+            for (Patient pat:patdir.getDir()){
                 if (pat.getUniqueID().toString().equals(IDPat)){
                     patToDisable = pat;                
                 }
@@ -1691,23 +1636,19 @@ public class mainJFrame extends javax.swing.JFrame {
 
     private void accountEnableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accountEnableActionPerformed
         int row = doctorListForSysAdmin.getSelectedRow();
-        DoctorPerson dpToDisable = new DoctorPerson();
+        Doctor drop_dis = new Doctor();
         if (row != -1){
             String ID = doctorListForSysAdmin.getValueAt(row, 0).toString();
-            for (DoctorPerson doc : docDir.getDoctorDir()){
+            for (Doctor doc : d_Dir.getDoctorDir()){
                 if (doc.getMdeicalLicenseNumber().toString().equals(ID)){
-                    dpToDisable = doc;               
+                    drop_dis = doc;               
                 }              
             }
-        }dpToDisable.setAccountStatus("Active");
+        }drop_dis.setAccountStatus("Active");
         JOptionPane.showMessageDialog(this, "The doctor account has been disabled.");
         sysAdminDocList();
-        PatientAppointmentDrList.addItem(dpToDisable.getUsername());
+        PatientAppointmentDrList.addItem(drop_dis.getUsrname());
     }//GEN-LAST:event_accountEnableActionPerformed
-
-    private void SubmitGrievencesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitGrievencesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_SubmitGrievencesActionPerformed
 
     private void registerSysAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerSysAdminActionPerformed
         registerationProcessSysAdmin();
@@ -1717,13 +1658,25 @@ public class mainJFrame extends javax.swing.JFrame {
     private void cancelSysAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelSysAdminActionPerformed
         SplitPanelPaint(SystemAdminHome);
     }//GEN-LAST:event_cancelSysAdminActionPerformed
+
+    private void jLabel10ComponentMoved(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jLabel10ComponentMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel10ComponentMoved
+
+    private void rolesComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rolesComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rolesComboBoxActionPerformed
+
+    private void ComComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComComboBox2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ComComboBox2ActionPerformed
     
     public Patient ValidationPerson(){
         Patient specificP = new Patient();
-        for (Patient p: dir.getDir()){
-            if (p.getUsername().equals(usernameTextField.getText()) && p.getPassword().equals(String.valueOf(passwordTextField.getPassword()))){
+        for (Patient p: patdir.getDir()){
+            if (p.getUsrname().equals(usernameTextField.getText()) && p.getPass().equals(String.valueOf(passwordTextField.getPassword()))){
                 if (p.getAccountStatus().toString().equals("Active")){
-                System.out.println(p.getUsername());
+                System.out.println(p.getUsrname());
                 specificP = p;
                 }else{
                     JOptionPane.showMessageDialog(this, "Sorry but your account has been disabled. Please contact the System Admin for corrections.");
@@ -1732,12 +1685,12 @@ public class mainJFrame extends javax.swing.JFrame {
         }return specificP;
     }
     
-    public DoctorPerson ValidationDoctor(){
-        DoctorPerson doc = new DoctorPerson();
-        for (DoctorPerson dr: docDir.getDoctorDir()){
-            if (dr.getUsername().equals(usernameTextField.getText()) && dr.getPassword().equals(String.valueOf(passwordTextField.getPassword()))){
+    public Doctor ValidationDoctor(){
+        Doctor doc = new Doctor();
+        for (Doctor dr: d_Dir.getDoctorDir()){
+            if (dr.getUsrname().equals(usernameTextField.getText()) && dr.getPass().equals(String.valueOf(passwordTextField.getPassword()))){
                 if (dr.getAccountStatus().toString().equals("Active")){
-                System.out.println(dr.getUsername()+ dr.getRole()+ dr.getAccountStatus());
+                System.out.println(dr.getUsrname()+ dr.getRole()+ dr.getAccountStatus());
                 doc = dr;
                 }else{
                   JOptionPane.showMessageDialog(this, "Sorry but your account has been disabled. Please contact the System Admin for corrections.");
@@ -1747,17 +1700,17 @@ public class mainJFrame extends javax.swing.JFrame {
     }return doc;
     }
     
-    public SystemAdmin ValidationSysAdmin() {
-        SystemAdmin sysAD = new SystemAdmin();
-        for (SystemAdmin adm: sysAdminDir.getAdminDirectory()){
-            if(adm.getUsername().equals(usernameTextField.getText()) && adm.getPassword().equals(String.valueOf(passwordTextField.getPassword()))){
-                if(adm.getAccountStatus().toString().equals("Active")){
-                sysAD = adm;
+    public SysAdmin ValidationSysAdmin() {
+        SysAdmin s_admin = new SysAdmin();
+        for (SysAdmin sadmin: sysAdminDir.getAdminDirectory()){
+            if(sadmin.getUsrname().equals(usernameTextField.getText()) && sadmin.getPass().equals(String.valueOf(passwordTextField.getPassword()))){
+                if(sadmin.getAccountStatus().toString().equals("Active")){
+                s_admin = sadmin;
                 }else{
                     JOptionPane.showMessageDialog(this, "Sorry but your account has been disabled. Please contact the System Admin for corrections.");
                 }
             }
-        }return sysAD;
+        }return s_admin;
     }
     
     /**
@@ -1805,27 +1758,28 @@ public class mainJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel AppLogo1;
     private javax.swing.JButton BackToPatientHome;
     private javax.swing.JLabel BloodpressureViewAppointment;
-    private javax.swing.JButton CancelGrievences;
     private javax.swing.JButton ClearVitalSigns;
+    private javax.swing.JComboBox<String> ComComboBox2;
     private javax.swing.JPanel CreatePatientAppointment;
     private javax.swing.JLabel DOB;
     private javax.swing.JLabel DiagnosisViewAppointment;
     private javax.swing.JTable DoctorAppointment;
     private javax.swing.JPanel DoctorHome;
     private javax.swing.JButton DoctorHomeBack;
-    private javax.swing.JPanel Grievences;
     private javax.swing.JLabel HeartRate;
     private javax.swing.JLabel HeightViewAppointment;
     private javax.swing.JPanel Login;
-    private javax.swing.JLabel MailIDGrievencesLabel;
-    private javax.swing.JTextField NumberGrievences;
-    private javax.swing.JLabel NumberGrievencesLabel;
     private javax.swing.JPanel Parent;
     private javax.swing.JTable PatienAppointmentHistory;
+    private javax.swing.JTextField PatientAppCom;
+    private javax.swing.JComboBox<String> PatientAppHosp;
     private javax.swing.JButton PatientAppointmentCancel;
+    private javax.swing.JLabel PatientAppointmentCom;
     private javax.swing.JLabel PatientAppointmentDate;
+    private com.toedter.calendar.JDateChooser PatientAppointmentDateChooser;
     private javax.swing.JLabel PatientAppointmentDoctor;
     private javax.swing.JComboBox<String> PatientAppointmentDrList;
+    private javax.swing.JLabel PatientAppointmentHosp;
     private javax.swing.JLabel PatientAppointmentReason;
     private javax.swing.JScrollPane PatientAppointmentReasonArea;
     private javax.swing.JButton PatientAppointmentSubmit;
@@ -1833,7 +1787,6 @@ public class mainJFrame extends javax.swing.JFrame {
     private javax.swing.JPanel Register;
     private javax.swing.JPanel RegisterViaSysAdmin;
     private javax.swing.JPanel RightComponent;
-    private javax.swing.JButton SubmitGrievences;
     private javax.swing.JPanel SystemAdminHome;
     private javax.swing.JLabel SystemAdminHomeTitle;
     private javax.swing.JLabel ViewAppointmentAilment;
@@ -1856,6 +1809,7 @@ public class mainJFrame extends javax.swing.JFrame {
     private javax.swing.JButton cancelSysAdmin;
     private javax.swing.JComboBox<String> comboBoxSysAdmin;
     private javax.swing.JButton createAppointment;
+    private com.toedter.calendar.JDateChooser dateChooserSysAdmin;
     private javax.swing.JLabel diagnosisVitalSignsRecording1;
     private javax.swing.JLabel dobSysAdmin;
     private javax.swing.JTable doctorListForSysAdmin;
@@ -1866,8 +1820,6 @@ public class mainJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel gender;
     private javax.swing.ButtonGroup genderButtonGroup;
     private javax.swing.JLabel genderSysAdmin;
-    private javax.swing.JComboBox<String> grievencesComboBox;
-    private javax.swing.JLabel grievencesSysAdmin;
     private javax.swing.JTextField heightFieldVitalSignsRecording1;
     private javax.swing.JLabel heightVitalSignsRecording1;
     private javax.swing.JButton jButton1;
@@ -1875,6 +1827,7 @@ public class mainJFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JLabel jCom;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -1887,29 +1840,23 @@ public class mainJFrame extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
-    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSplitPane jSplitPane1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
     private javax.swing.JTextArea jTextArea3;
     private javax.swing.JTextArea jTextArea4;
     private javax.swing.JLabel leftAccID;
     private javax.swing.JLabel leftWelcome;
-    private javax.swing.JTextField mailIDGrievences;
     private javax.swing.JLabel mailIDSysAdmin;
     private javax.swing.JTextField mailIDTextField;
     private javax.swing.JTextField mailTextFieldSysAdmin;
     private javax.swing.JRadioButton maleButton;
-    private javax.swing.JLabel medicalLicense;
-    private javax.swing.JTextField medicalLicenseNumberTextField;
     private javax.swing.JLabel mlnSysAdmin;
     private javax.swing.JTextField mlnTextFieldSysAdmin;
     private javax.swing.JTextField numberTextFieldSysAdmin;
@@ -1931,7 +1878,7 @@ public class mainJFrame extends javax.swing.JFrame {
     private javax.swing.JTextField respirationRateFieldVitalSignsRecording;
     private javax.swing.JLabel respirationRateIDVitalSignsRecording4;
     private javax.swing.JLabel respirationRateViewAppointment;
-    private javax.swing.JLabel role;
+    private javax.swing.JLabel role1;
     private javax.swing.JLabel roleSysAdmin;
     private javax.swing.JComboBox<String> rolesComboBox;
     private javax.swing.JTextField temperatureFieldVitalSignsRecording4;
