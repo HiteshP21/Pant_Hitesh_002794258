@@ -5,8 +5,8 @@
 package model;
 
 /**
- *bp, height heart rate, temps, respiration.
- * @author tarush
+ *
+ * @author Hitesh
  */
 public class VitalSigns extends Patient{
     private int heartRate;
