@@ -40,7 +40,7 @@ Community
 Community Dir
 
 
-The person Class contains the following methods:
+## The person Class contains the following methods:
 
 get-set :: community
 
