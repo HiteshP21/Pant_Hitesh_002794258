@@ -16,6 +16,24 @@ public class Encounter extends VitalSigns{
     private String encdoc;
     private String encId;
     private String diagnosis;
+    private String encom;
+    private String enchosp;
+
+    public String getEnchosp() {
+        return enchosp;
+    }
+
+    public void setEnchosp(String enchosp) {
+        this.enchosp = enchosp;
+    }
+
+    public String getEncom() {
+        return encom;
+    }
+
+    public void setEncom(String encom) {
+        this.encom = encom;
+    }
 
     public String getDiagnosis() {
         return diagnosis;
@@ -33,11 +51,11 @@ public class Encounter extends VitalSigns{
         this.encId = encounterID;
     }
 
-    public String getAilment() {
+    public String getIssue() {
         return issue;
     }
 
-    public void setAilment(String ailment) {
+    public void setIssue(String issue) {
         this.issue = issue;
     }
 
@@ -56,4 +74,5 @@ public class Encounter extends VitalSigns{
     public void setEncounterWith(String encounterWith) {
         this.encdoc = encounterWith;
     }
+
 }

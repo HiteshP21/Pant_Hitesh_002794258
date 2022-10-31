@@ -11,10 +11,10 @@ import java.util.ArrayList;
  * @author Hitesh
  */
 public class Patient_Dir {
-    private ArrayList<Patient> dir = new ArrayList<>();
-    
+//    private ArrayList<Patient> dir = new ArrayList<>();
+    private ArrayList<Patient> dir;
     public Patient_Dir(){
-        this.dir = new ArrayList<>();
+        this.dir = new ArrayList<Patient>();
     }
 
     public void setDir(ArrayList<Patient> dir) {

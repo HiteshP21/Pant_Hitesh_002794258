@@ -29,4 +29,7 @@ public class Hospital_Dir {
         hospitaldir.add(hosp);
         return hosp;
     }
+    public void deleteInfo(Hospital vs){
+        hospitaldir.remove(vs);
+    }
 }

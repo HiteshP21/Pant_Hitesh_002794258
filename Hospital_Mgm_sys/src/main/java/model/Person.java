@@ -20,6 +20,15 @@ public class Person {
     private int mob;
     private String gender;
     private Date dob;
+    private String com;
+
+    public String getCom() {
+        return com;
+    }
+
+    public void setCom(String com) {
+        this.com = com;
+    }
     private String AccountStatus = "Active";
     ;
 

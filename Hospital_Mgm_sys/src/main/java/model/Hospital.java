@@ -11,7 +11,9 @@ package model;
 public class Hospital {
     private String hopName;
     private int hospId;
-    private String hospAdd;
+    private String hospSt1;
+    private String hospSt2;
+    private String hospZip;
     private String hospCom;
 
     public String getHopName() {
@@ -30,12 +32,28 @@ public class Hospital {
         this.hospId = hospId;
     }
 
-    public String getHospAdd() {
-        return hospAdd;
+    public String getHospSt1() {
+        return hospSt1;
     }
 
-    public void setHospAdd(String hospAdd) {
-        this.hospAdd = hospAdd;
+    public void setHospSt1(String hospSt1) {
+        this.hospSt1 = hospSt1;
+    }
+
+    public String getHospSt2() {
+        return hospSt2;
+    }
+
+    public void setHospSt2(String hospSt2) {
+        this.hospSt2 = hospSt2;
+    }
+
+    public String getHospZip() {
+        return hospZip;
+    }
+
+    public void setHospZip(String hospZip) {
+        this.hospZip = hospZip;
     }
 
     public String getHospCom() {

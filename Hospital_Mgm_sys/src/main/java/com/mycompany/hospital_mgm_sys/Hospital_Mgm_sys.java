@@ -3,15 +3,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Project/Maven2/JavaApp/src/main/java/${packagePath}/${mainClassName}.java to edit this template
  */
 
-package com.mycompany.hospital_mgm_system;
+package com.mycompany.hospital_mgm_sys;
 
 /**
  *
  * @author Hitesh
  */
-public class Hospital_Mgm_system {
+public class Hospital_Mgm_sys {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
     }
 }

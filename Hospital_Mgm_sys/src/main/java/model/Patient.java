@@ -10,6 +10,15 @@ package model;
  */
 public class Patient extends Person{
     private String uniqueID;
+    private String bloodG;
+
+    public String getBloodG() {
+        return bloodG;
+    }
+
+    public void setBloodG(String bloodG) {
+        this.bloodG = bloodG;
+    }
 
     public String getUniqueID() {
         return uniqueID;
